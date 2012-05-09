@@ -1,6 +1,6 @@
 == CocoaRegex
 
-Objective-C wrapper of ICU regular expression libraries.
+Objective-C wrapper of ICU regular expression library.
 
 This library supports OS X 10.6+ and iOS 4+, both ARC and non-ARC environments.
 
