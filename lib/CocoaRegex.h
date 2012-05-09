@@ -4,7 +4,7 @@
 #import <Foundation/Foundation.h>
 
 typedef enum { 
-    CocoaRegexCaseInsensitive               = 1 << 0,
+    CocoaRegexCaseInsensitive               = 1 << 1,
     CocoaRegexAllowCommentsAndWhitespace    = 1 << 2,
     CocoaRegexAnchorsMatchLines             = 1 << 3,
     CocoaRegexDotMatchesLineSeparators      = 1 << 5,
