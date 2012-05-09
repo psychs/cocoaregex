@@ -1,0 +1,11 @@
+== CocoaRegex
+
+Objective-C wrapper of ICU regular expression libraries.
+
+This library supports OS X 10.6+ and iOS 4+, both ARC and non-ARC environments.
+
+== License
+
+Copyright (c) 2012 Satoshi Nakagawa
+
+Licensed under the new BSD license.

@@ -1,0 +1,280 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		787AEB40155A25DE003CEE0F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 787AEB3F155A25DE003CEE0F /* SenTestingKit.framework */; };
+		787AEB43155A25DE003CEE0F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 787AEB31155A25DE003CEE0F /* Foundation.framework */; };
+		78B98A5A155A271700B455DF /* CocoaRegexTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 78B98A59155A271700B455DF /* CocoaRegexTests.m */; };
+		78B98A5D155A272000B455DF /* CocoaRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 78B98A5C155A272000B455DF /* CocoaRegex.m */; };
+		78B98A5F155A27F300B455DF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 78B98A5E155A27F300B455DF /* libicucore.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		787AEB31155A25DE003CEE0F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		787AEB3E155A25DE003CEE0F /* CocoaRegexTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaRegexTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		787AEB3F155A25DE003CEE0F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		78B98A50155A26E400B455DF /* CocoaRegex-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CocoaRegex-Prefix.pch"; sourceTree = "<group>"; };
+		78B98A52155A26EA00B455DF /* CocoaRegexTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CocoaRegexTests-Info.plist"; sourceTree = "<group>"; };
+		78B98A58155A271700B455DF /* CocoaRegexTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaRegexTests.h; sourceTree = "<group>"; };
+		78B98A59155A271700B455DF /* CocoaRegexTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocoaRegexTests.m; sourceTree = "<group>"; };
+		78B98A5B155A272000B455DF /* CocoaRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocoaRegex.h; path = ../lib/CocoaRegex.h; sourceTree = "<group>"; };
+		78B98A5C155A272000B455DF /* CocoaRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CocoaRegex.m; path = ../lib/CocoaRegex.m; sourceTree = "<group>"; };
+		78B98A5E155A27F300B455DF /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		787AEB3A155A25DE003CEE0F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78B98A5F155A27F300B455DF /* libicucore.dylib in Frameworks */,
+				787AEB40155A25DE003CEE0F /* SenTestingKit.framework in Frameworks */,
+				787AEB43155A25DE003CEE0F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		787AEB23155A25DE003CEE0F = {
+			isa = PBXGroup;
+			children = (
+				78B98A49155A268900B455DF /* Classes */,
+				78B98A4B155A26B600B455DF /* Tests */,
+				78B98A4A155A269800B455DF /* Others */,
+				787AEB30155A25DE003CEE0F /* Frameworks */,
+				787AEB2F155A25DE003CEE0F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		787AEB2F155A25DE003CEE0F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				787AEB3E155A25DE003CEE0F /* CocoaRegexTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		787AEB30155A25DE003CEE0F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				787AEB31155A25DE003CEE0F /* Foundation.framework */,
+				787AEB3F155A25DE003CEE0F /* SenTestingKit.framework */,
+				78B98A5E155A27F300B455DF /* libicucore.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		78B98A49155A268900B455DF /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				78B98A5B155A272000B455DF /* CocoaRegex.h */,
+				78B98A5C155A272000B455DF /* CocoaRegex.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		78B98A4A155A269800B455DF /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				78B98A50155A26E400B455DF /* CocoaRegex-Prefix.pch */,
+				78B98A52155A26EA00B455DF /* CocoaRegexTests-Info.plist */,
+			);
+			name = Others;
+			sourceTree = "<group>";
+		};
+		78B98A4B155A26B600B455DF /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				78B98A58155A271700B455DF /* CocoaRegexTests.h */,
+				78B98A59155A271700B455DF /* CocoaRegexTests.m */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		787AEB3D155A25DE003CEE0F /* CocoaRegexTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 787AEB55155A25DE003CEE0F /* Build configuration list for PBXNativeTarget "CocoaRegexTests" */;
+			buildPhases = (
+				787AEB39155A25DE003CEE0F /* Sources */,
+				787AEB3A155A25DE003CEE0F /* Frameworks */,
+				787AEB3B155A25DE003CEE0F /* Resources */,
+				787AEB3C155A25DE003CEE0F /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CocoaRegexTests;
+			productName = CocoaRegexTests;
+			productReference = 787AEB3E155A25DE003CEE0F /* CocoaRegexTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		787AEB25155A25DE003CEE0F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Twitter, Inc.";
+			};
+			buildConfigurationList = 787AEB28155A25DE003CEE0F /* Build configuration list for PBXProject "CocoaRegex" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 787AEB23155A25DE003CEE0F;
+			productRefGroup = 787AEB2F155A25DE003CEE0F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				787AEB3D155A25DE003CEE0F /* CocoaRegexTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		787AEB3B155A25DE003CEE0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		787AEB3C155A25DE003CEE0F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		787AEB39155A25DE003CEE0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78B98A5A155A271700B455DF /* CocoaRegexTests.m in Sources */,
+				78B98A5D155A272000B455DF /* CocoaRegex.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		787AEB50155A25DE003CEE0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		787AEB51155A25DE003CEE0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		787AEB56155A25DE003CEE0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CocoaRegex-Prefix.pch";
+				INFOPLIST_FILE = "CocoaRegexTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		787AEB57155A25DE003CEE0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CocoaRegex-Prefix.pch";
+				INFOPLIST_FILE = "CocoaRegexTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		787AEB28155A25DE003CEE0F /* Build configuration list for PBXProject "CocoaRegex" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				787AEB50155A25DE003CEE0F /* Debug */,
+				787AEB51155A25DE003CEE0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		787AEB55155A25DE003CEE0F /* Build configuration list for PBXNativeTarget "CocoaRegexTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				787AEB56155A25DE003CEE0F /* Debug */,
+				787AEB57155A25DE003CEE0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 787AEB25155A25DE003CEE0F /* Project object */;
+}
