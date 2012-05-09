@@ -57,6 +57,7 @@ const char* u_errorName(UErrorCode status);
 @implementation CocoaRegex
 {
     URegularExpression* regex;
+    NSUInteger startOffset;
 }
 
 + (CocoaRegex*)regexWithPattern:(NSString*)pattern options:(CocoaRegexOptions)options
@@ -120,22 +121,38 @@ const char* u_errorName(UErrorCode status);
     return [self matchesInString:string start:0];
 }
 
-- (BOOL)matchesInString:(NSString*)string start:(NSUInteger)start;
+- (BOOL)matchesInString:(NSString*)string start:(NSUInteger)start
 {
-    return [self rangeOfFirstMatchInString:string start:start].location != NSNotFound;
+    return [self rangeOfFirstMatchInString:string start:start end:NSNotFound].location != NSNotFound;
+}
+
+- (BOOL)matchesInString:(NSString*)string start:(NSUInteger)start end:(NSUInteger)end
+{
+    return [self rangeOfFirstMatchInString:string start:start end:end].location != NSNotFound;
 }
 
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string
 {
-    return [self rangeOfFirstMatchInString:string start:0];
+    return [self rangeOfFirstMatchInString:string start:0 end:NSNotFound];
 }
 
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string start:(NSUInteger)start
 {
+    return [self rangeOfFirstMatchInString:string start:start end:NSNotFound];
+}
+
+- (NSRange)rangeOfFirstMatchInString:(NSString*)string start:(NSUInteger)start end:(NSUInteger)end
+{
     int len = string.length;
-    if (!len || len <= start) {
+    if (end == NSNotFound) {
+        end = len - 1;
+    }
+    
+    if (!len || len <= start || len <= end || end < start) {
         return NSMakeRange(NSNotFound, 0);
     }
+    
+    startOffset = start;
     
     UniChar buf[len];
     [string getCharacters:buf];
@@ -144,10 +161,10 @@ const char* u_errorName(UErrorCode status);
     uregex_reset(regex, 0, &status);
     
     status = 0;
-    uregex_setText(regex, buf, len, &status);
+    uregex_setText(regex, buf + startOffset, end + 1 - startOffset, &status);
     
     status = 0;
-    BOOL res = uregex_find(regex, start, &status);
+    BOOL res = uregex_find(regex, 0, &status);
     if (res) {
         return [self matchingRangeAt:0];
     }
@@ -168,7 +185,7 @@ const char* u_errorName(UErrorCode status);
     status = 0;
     int32_t end = uregex_end(regex, index, &status);
     if (location != -1) {
-        return NSMakeRange(location, end - location);
+        return NSMakeRange(location + startOffset, end - location);
     } else {
         return NSMakeRange(NSNotFound, 0);
     }
