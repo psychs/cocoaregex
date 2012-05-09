@@ -19,9 +19,11 @@ typedef enum {
 
 - (BOOL)matchesInString:(NSString*)string;
 - (BOOL)matchesInString:(NSString*)string start:(NSUInteger)start;
+- (BOOL)matchesInString:(NSString*)string start:(NSUInteger)start end:(NSUInteger)end;
 
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string;
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string start:(NSUInteger)start;
+- (NSRange)rangeOfFirstMatchInString:(NSString*)string start:(NSUInteger)start end:(NSUInteger)end;
 
 - (NSUInteger)numberOfMatchingRanges;
 - (NSRange)matchingRangeAt:(NSUInteger)index;
