@@ -118,50 +118,36 @@ const char* u_errorName(UErrorCode status);
 
 - (BOOL)matchesInString:(NSString *)string
 {
-    return [self matchesInString:string start:0];
+    return [self matchesInString:string range:NSMakeRange(0, string.length)];
 }
 
-- (BOOL)matchesInString:(NSString*)string start:(NSUInteger)start
+- (BOOL)matchesInString:(NSString*)string range:(NSRange)range
 {
-    return [self rangeOfFirstMatchInString:string start:start end:NSNotFound].location != NSNotFound;
-}
-
-- (BOOL)matchesInString:(NSString*)string start:(NSUInteger)start end:(NSUInteger)end
-{
-    return [self rangeOfFirstMatchInString:string start:start end:end].location != NSNotFound;
+    return [self rangeOfFirstMatchInString:string range:range].location != NSNotFound;
 }
 
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string
 {
-    return [self rangeOfFirstMatchInString:string start:0 end:NSNotFound];
+    return [self rangeOfFirstMatchInString:string range:NSMakeRange(0, string.length)];
 }
 
-- (NSRange)rangeOfFirstMatchInString:(NSString*)string start:(NSUInteger)start
-{
-    return [self rangeOfFirstMatchInString:string start:start end:NSNotFound];
-}
-
-- (NSRange)rangeOfFirstMatchInString:(NSString*)string start:(NSUInteger)start end:(NSUInteger)end
+- (NSRange)rangeOfFirstMatchInString:(NSString*)string range:(NSRange)range
 {
     int len = string.length;
-    if (end == NSNotFound) {
-        end = len - 1;
-    }
-    
-    if (!len || len <= start || len <= end || end < start) {
+    if (!len || !range.length || len <= range.location || len < NSMaxRange(range)) {
         return NSMakeRange(NSNotFound, 0);
     }
     
-    startOffset = start;
+    startOffset = range.location;
     
     UniChar buf[len];
-    [string getCharacters:buf];
+    [string getCharacters:buf range:NSMakeRange(0, len)];
     
     UErrorCode status = 0;
     uregex_reset(regex, 0, &status);
     
     status = 0;
-    uregex_setText(regex, buf + startOffset, end + 1 - startOffset, &status);
+    uregex_setText(regex, buf + startOffset, range.length, &status);
     
     status = 0;
     BOOL res = uregex_find(regex, 0, &status);

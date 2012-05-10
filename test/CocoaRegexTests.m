@@ -78,13 +78,15 @@
     [masterRegex autorelease];
 #endif
     CocoaRegex *regex;
+    NSString *s;
     NSRange r, expected;
     
     regex = [masterRegex copy];
 #if !__has_feature(objc_arc)
     [regex autorelease];
 #endif
-    r = [regex rangeOfFirstMatchInString:@"a8s9daf87daf79Sd7fa" start:7];
+    s = @"a8s9daf87daf79Sd7fa";
+    r = [regex rangeOfFirstMatchInString:s range:NSMakeRange(7, s.length - 7)];
     expected = NSMakeRange(7, 7);
     STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
     
@@ -92,7 +94,8 @@
 #if !__has_feature(objc_arc)
     [regex autorelease];
 #endif
-    r = [regex rangeOfFirstMatchInString:@"" start:7];
+    s = @"";
+    r = [regex rangeOfFirstMatchInString:s range:NSMakeRange(0, 0)];
     expected = NSMakeRange(NSNotFound, 0);
     STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
 }
@@ -121,7 +124,7 @@
 #if !__has_feature(objc_arc)
     [regex autorelease];
 #endif
-    s = @"asf asdfa http://www.example.com/path/to/page?param=value&param=value#fragment< ";
+    s = @"asf asdfa http://www.example.com/Path/To/Page?param=value&param=value#fragment< ";
     r = [regex rangeOfFirstMatchInString:s];
     expected = NSMakeRange(10, 68);
     STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));

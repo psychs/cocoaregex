@@ -18,12 +18,10 @@ typedef enum {
 - (id)initWithPattern:(NSString*)pattern options:(CocoaRegexOptions)options;
 
 - (BOOL)matchesInString:(NSString*)string;
-- (BOOL)matchesInString:(NSString*)string start:(NSUInteger)start;
-- (BOOL)matchesInString:(NSString*)string start:(NSUInteger)start end:(NSUInteger)end;
+- (BOOL)matchesInString:(NSString*)string range:(NSRange)range;
 
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string;
-- (NSRange)rangeOfFirstMatchInString:(NSString*)string start:(NSUInteger)start;
-- (NSRange)rangeOfFirstMatchInString:(NSString*)string start:(NSUInteger)start end:(NSUInteger)end;
+- (NSRange)rangeOfFirstMatchInString:(NSString*)string range:(NSRange)range;
 
 - (NSUInteger)numberOfMatchingRanges;
 - (NSRange)matchingRangeAt:(NSUInteger)index;
