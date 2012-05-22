@@ -49,6 +49,7 @@ int32_t uregex_groupCount(URegularExpression* regexp, UErrorCode* status);
 int32_t uregex_start(URegularExpression* regexp, int32_t groupNum, UErrorCode* status);
 int32_t uregex_end(URegularExpression* regexp, int32_t groupNum, UErrorCode* status);
 const char* u_errorName(UErrorCode status);
+void uregex_setRegion(URegularExpression *regexp, int32_t regionStart, int32_t regionLimit, UErrorCode *status);
 
 //
 // End of uregex.h.
@@ -57,7 +58,6 @@ const char* u_errorName(UErrorCode status);
 @implementation CocoaRegex
 {
     URegularExpression* regex;
-    NSUInteger startOffset;
 }
 
 + (CocoaRegex*)regexWithPattern:(NSString*)pattern options:(CocoaRegexOptions)options
@@ -138,19 +138,20 @@ const char* u_errorName(UErrorCode status);
         return NSMakeRange(NSNotFound, 0);
     }
     
-    startOffset = range.location;
-    
     UniChar buf[len];
-    [string getCharacters:buf range:NSMakeRange(0, len)];
+    [string getCharacters:buf];
     
     UErrorCode status = 0;
     uregex_reset(regex, 0, &status);
     
     status = 0;
-    uregex_setText(regex, buf + startOffset, range.length, &status);
+    uregex_setText(regex, buf, string.length, &status);
     
     status = 0;
-    BOOL res = uregex_find(regex, 0, &status);
+    uregex_setRegion(regex, range.location, NSMaxRange(range), &status);
+    
+    status = 0;
+    BOOL res = uregex_find(regex, -1, &status);
     if (res) {
         return [self matchingRangeAt:0];
     }
@@ -171,7 +172,7 @@ const char* u_errorName(UErrorCode status);
     status = 0;
     int32_t end = uregex_end(regex, index, &status);
     if (location != -1) {
-        return NSMakeRange(location + startOffset, end - location);
+        return NSMakeRange(location, end - location);
     } else {
         return NSMakeRange(NSNotFound, 0);
     }
