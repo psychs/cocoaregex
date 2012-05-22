@@ -34,6 +34,7 @@ typedef struct UParseError {
 } UParseError;
 
 typedef int32_t UErrorCode;
+typedef int8_t UBool;
 
 URegularExpression* uregex_open(const UniChar* pattern, int32_t patternLength, uint32_t flags, UParseError* pe, UErrorCode* status);
 void uregex_close(URegularExpression* regexp);
@@ -42,6 +43,7 @@ void uregex_reset(URegularExpression* regexp, int32_t index, UErrorCode* status)
 void uregex_setText(URegularExpression* regexp, const UniChar* text, int32_t textLength, UErrorCode* status);
 BOOL uregex_find(URegularExpression* regexp, int32_t startIndex, UErrorCode* status);
 BOOL uregex_findNext(URegularExpression* regexp, UErrorCode* status);
+UBool uregex_lookingAt(URegularExpression *regexp, int32_t startIndex, UErrorCode *status);
 int32_t uregex_replaceAll(URegularExpression* regexp, const UniChar *replacementText, int32_t replacementLength, UniChar * destBuf, int32_t destCapacity, UErrorCode * status);
 int32_t uregex_appendReplacement(URegularExpression* regexp, const UniChar* replacementText, int32_t replacementLength, UniChar** destBuf, int32_t* destCapacity, UErrorCode* status);
 int32_t uregex_appendTail(URegularExpression* regexp, UniChar** destBuf, int32_t* destCapacity, UErrorCode* status);
@@ -50,6 +52,8 @@ int32_t uregex_start(URegularExpression* regexp, int32_t groupNum, UErrorCode* s
 int32_t uregex_end(URegularExpression* regexp, int32_t groupNum, UErrorCode* status);
 const char* u_errorName(UErrorCode status);
 void uregex_setRegion(URegularExpression *regexp, int32_t regionStart, int32_t regionLimit, UErrorCode *status);
+void uregex_useAnchoringBounds(URegularExpression *regexp, UBool b, UErrorCode *status);
+void uregex_useTransparentBounds(URegularExpression *regexp, UBool b, UErrorCode *status);
 
 //
 // End of uregex.h.
@@ -118,20 +122,30 @@ void uregex_setRegion(URegularExpression *regexp, int32_t regionStart, int32_t r
 
 - (BOOL)matchesInString:(NSString *)string
 {
-    return [self matchesInString:string range:NSMakeRange(0, string.length)];
+    return [self matchesInString:string range:NSMakeRange(0, string.length) options:0];
 }
 
 - (BOOL)matchesInString:(NSString*)string range:(NSRange)range
 {
-    return [self rangeOfFirstMatchInString:string range:range].location != NSNotFound;
+    return [self rangeOfFirstMatchInString:string range:range options:0].location != NSNotFound;
+}
+
+- (BOOL)matchesInString:(NSString*)string range:(NSRange)range options:(CocoaRegexMatchingOptions)options
+{
+    return [self rangeOfFirstMatchInString:string range:range options:options].location != NSNotFound;
 }
 
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string
 {
-    return [self rangeOfFirstMatchInString:string range:NSMakeRange(0, string.length)];
+    return [self rangeOfFirstMatchInString:string range:NSMakeRange(0, string.length) options:0];
 }
 
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string range:(NSRange)range
+{
+    return [self rangeOfFirstMatchInString:string range:range options:0];
+}
+
+- (NSRange)rangeOfFirstMatchInString:(NSString*)string range:(NSRange)range options:(CocoaRegexMatchingOptions)options
 {
     int len = string.length;
     if (!len || !range.length || len <= range.location || len < NSMaxRange(range)) {
@@ -150,8 +164,25 @@ void uregex_setRegion(URegularExpression *regexp, int32_t regionStart, int32_t r
     status = 0;
     uregex_setRegion(regex, range.location, NSMaxRange(range), &status);
     
+    if (options & CocoaRegexMatchingWithoutAnchoringBounds) {
+        status = 0;
+        uregex_useAnchoringBounds(regex, FALSE, &status);
+    }
+    
+    if (options & CocoaRegexMatchingWithTransparentBounds) {
+        status = 0;
+        uregex_useTransparentBounds(regex, TRUE, &status);
+    }
+    
     status = 0;
-    BOOL res = uregex_find(regex, -1, &status);
+    BOOL res = NO;
+    
+    if (options & CocoaRegexMatchingAnchored) {
+        res = uregex_lookingAt(regex, -1, &status);
+    } else {
+        res = uregex_find(regex, -1, &status);
+    }
+    
     if (res) {
         return [self matchingRangeAt:0];
     }

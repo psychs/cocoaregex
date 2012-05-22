@@ -70,6 +70,78 @@
     STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
 }
 
+- (void)testMatchingOptions
+{
+    NSString *pattern = @"^[A-Z0-9]{2}";
+    CocoaRegex *masterRegex = [[CocoaRegex alloc] initWithPattern:pattern options:0];
+#if !__has_feature(objc_arc)
+    [masterRegex autorelease];
+#endif
+    CocoaRegex *regex;
+    NSRange r, expected;
+    
+    // Test various anchoring options
+    regex = [masterRegex copy];
+#if !__has_feature(objc_arc)
+    [regex autorelease];
+#endif
+    NSString *s = @"A1abZZ BB2ss";
+    r = [regex rangeOfFirstMatchInString:s range:NSMakeRange(7, s.length - 7) options:CocoaRegexMatchingWithoutAnchoringBounds];
+    expected = NSMakeRange(NSNotFound, 0);
+    STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
+    
+    regex = [masterRegex copy];
+#if !__has_feature(objc_arc)
+    [regex autorelease];
+#endif
+    r = [regex rangeOfFirstMatchInString:s range:NSMakeRange(7, s.length - 7)];
+    expected = NSMakeRange(7, 2);
+    STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
+    
+    regex = [masterRegex copy];
+#if !__has_feature(objc_arc)
+    [regex autorelease];
+#endif
+    s = @"A1abZZ :@#AA";
+    r = [regex rangeOfFirstMatchInString:s range:NSMakeRange(7, s.length - 7) options:CocoaRegexMatchingAnchored];
+    expected = NSMakeRange(NSNotFound, 0);
+    STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
+    
+    regex = [masterRegex copy];
+#if !__has_feature(objc_arc)
+    [regex autorelease];
+#endif
+    s = @"A1abZZ AA:@#";
+    r = [regex rangeOfFirstMatchInString:s range:NSMakeRange(7, s.length - 7) options:CocoaRegexMatchingAnchored];
+    expected = NSMakeRange(7, 2);
+    STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
+    
+    // Test CocoaRegexMatchingWithTransparentBounds matching option
+    pattern = @"test(?!ing)";
+    masterRegex = [[CocoaRegex alloc] initWithPattern:pattern options:0];
+#if !__has_feature(objc_arc)
+    [masterRegex autorelease];
+#endif
+    
+    regex = [masterRegex copy];
+#if !__has_feature(objc_arc)
+    [regex autorelease];
+#endif
+    s = @"testing";
+    r = [regex rangeOfFirstMatchInString:s range:NSMakeRange(0, 4)];
+    expected = NSMakeRange(0, 4);
+    STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
+    
+    regex = [masterRegex copy];
+#if !__has_feature(objc_arc)
+    [regex autorelease];
+#endif
+    s = @"testing";
+    r = [regex rangeOfFirstMatchInString:s range:NSMakeRange(0, 4) options:CocoaRegexMatchingWithTransparentBounds];
+    expected = NSMakeRange(NSNotFound, 0);
+    STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
+}
+
 - (void)testStart
 {
     NSString *pattern = @"[a-z0-9]+";
