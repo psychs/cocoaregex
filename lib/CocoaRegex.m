@@ -122,30 +122,30 @@ void uregex_useTransparentBounds(URegularExpression *regexp, UBool b, UErrorCode
 
 - (BOOL)matchesInString:(NSString *)string
 {
-    return [self matchesInString:string range:NSMakeRange(0, string.length) options:0];
+    return [self matchesInString:string options:0 range:NSMakeRange(0, string.length)];
 }
 
 - (BOOL)matchesInString:(NSString*)string range:(NSRange)range
 {
-    return [self rangeOfFirstMatchInString:string range:range options:0].location != NSNotFound;
+    return [self rangeOfFirstMatchInString:string options:0 range:range].location != NSNotFound;
 }
 
-- (BOOL)matchesInString:(NSString*)string range:(NSRange)range options:(CocoaRegexMatchingOptions)options
+- (BOOL)matchesInString:(NSString*)string  options:(CocoaRegexMatchingOptions)options range:(NSRange)range
 {
-    return [self rangeOfFirstMatchInString:string range:range options:options].location != NSNotFound;
+    return [self rangeOfFirstMatchInString:string options:options range:range].location != NSNotFound;
 }
 
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string
 {
-    return [self rangeOfFirstMatchInString:string range:NSMakeRange(0, string.length) options:0];
+    return [self rangeOfFirstMatchInString:string options:0 range:NSMakeRange(0, string.length)];
 }
 
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string range:(NSRange)range
 {
-    return [self rangeOfFirstMatchInString:string range:range options:0];
+    return [self rangeOfFirstMatchInString:string options:0 range:range];
 }
 
-- (NSRange)rangeOfFirstMatchInString:(NSString*)string range:(NSRange)range options:(CocoaRegexMatchingOptions)options
+- (NSRange)rangeOfFirstMatchInString:(NSString*)string options:(CocoaRegexMatchingOptions)options range:(NSRange)range
 {
     int len = string.length;
     if (!len || !range.length || len <= range.location || len < NSMaxRange(range)) {

@@ -30,11 +30,11 @@ typedef enum {
 
 - (BOOL)matchesInString:(NSString*)string;
 - (BOOL)matchesInString:(NSString*)string range:(NSRange)range;
-- (BOOL)matchesInString:(NSString*)string range:(NSRange)range options:(CocoaRegexMatchingOptions)options;
+- (BOOL)matchesInString:(NSString*)string options:(CocoaRegexMatchingOptions)options range:(NSRange)range;
 
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string;
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string range:(NSRange)range;
-- (NSRange)rangeOfFirstMatchInString:(NSString*)string range:(NSRange)range options:(CocoaRegexMatchingOptions)options;
+- (NSRange)rangeOfFirstMatchInString:(NSString*)string options:(CocoaRegexMatchingOptions)options range:(NSRange)range;
 
 - (NSUInteger)numberOfMatchingRanges;
 - (NSRange)matchingRangeAt:(NSUInteger)index;

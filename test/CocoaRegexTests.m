@@ -86,7 +86,7 @@
     [regex autorelease];
 #endif
     NSString *s = @"A1abZZ BB2ss";
-    r = [regex rangeOfFirstMatchInString:s range:NSMakeRange(7, s.length - 7) options:CocoaRegexMatchingWithoutAnchoringBounds];
+    r = [regex rangeOfFirstMatchInString:s options:CocoaRegexMatchingWithoutAnchoringBounds range:NSMakeRange(7, s.length - 7)];
     expected = NSMakeRange(NSNotFound, 0);
     STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
     
@@ -103,7 +103,7 @@
     [regex autorelease];
 #endif
     s = @"A1abZZ :@#AA";
-    r = [regex rangeOfFirstMatchInString:s range:NSMakeRange(7, s.length - 7) options:CocoaRegexMatchingAnchored];
+    r = [regex rangeOfFirstMatchInString:s options:CocoaRegexMatchingAnchored range:NSMakeRange(7, s.length - 7)];
     expected = NSMakeRange(NSNotFound, 0);
     STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
     
@@ -112,7 +112,7 @@
     [regex autorelease];
 #endif
     s = @"A1abZZ AA:@#";
-    r = [regex rangeOfFirstMatchInString:s range:NSMakeRange(7, s.length - 7) options:CocoaRegexMatchingAnchored];
+    r = [regex rangeOfFirstMatchInString:s options:CocoaRegexMatchingAnchored range:NSMakeRange(7, s.length - 7)];
     expected = NSMakeRange(7, 2);
     STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
     
@@ -137,7 +137,7 @@
     [regex autorelease];
 #endif
     s = @"testing";
-    r = [regex rangeOfFirstMatchInString:s range:NSMakeRange(0, 4) options:CocoaRegexMatchingWithTransparentBounds];
+    r = [regex rangeOfFirstMatchInString:s options:CocoaRegexMatchingWithTransparentBounds range:NSMakeRange(0, 4)];
     expected = NSMakeRange(NSNotFound, 0);
     STAssertTrue(NSEqualRanges(expected, r), @"%@ != %@", NSStringFromRange(expected), NSStringFromRange(r));
 }
